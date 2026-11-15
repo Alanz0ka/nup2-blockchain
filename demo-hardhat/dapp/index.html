@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DApp de votação (demo NUP2)</title>
+<style>
+  :root { --fundo:#f6f7f9; --card:#fff; --texto:#1b2430; --suave:#5d6b7a; --borda:#d9dee5; --ok:#1d6f42; --erro:#b3261e; --destaque:#2c4a7c; }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:24px 16px; background:var(--fundo); color:var(--texto); font:16px/1.5 Arial, sans-serif; }
+  main { max-width:720px; margin:0 auto; display:grid; gap:16px; }
+  section { background:var(--card); border:1px solid var(--borda); border-radius:8px; padding:16px; }
+  h1 { font-size:22px; margin:0 0 4px; }
+  h2 { font-size:16px; margin:0 0 12px; }
+  small, .suave { color:var(--suave); }
+  label { display:block; font-size:14px; color:var(--suave); margin-bottom:4px; }
+  input, select, button { font:inherit; padding:8px 10px; border:1px solid var(--borda); border-radius:6px; }
+  input { width:100%; }
+  button { background:var(--destaque); color:#fff; border-color:var(--destaque); cursor:pointer; }
+  button:disabled { opacity:.5; cursor:not-allowed; }
+  button.sec { background:#fff; color:var(--destaque); }
+  .linha { display:flex; gap:8px; flex-wrap:wrap; align-items:end; }
+  .linha > * { flex:1 1 160px; }
+  .opcao { display:grid; grid-template-columns:110px 1fr 40px; gap:8px; align-items:center; margin:6px 0; }
+  .barra { height:14px; background:#e8ecf1; border-radius:7px; overflow:hidden; }
+  .barra > i { display:block; height:100%; background:var(--destaque); width:0; transition:width .3s; }
+  #msg { min-height:24px; font-weight:bold; }
+  .ok { color:var(--ok); } .erro { color:var(--erro); }
+  ul { margin:0; padding-left:18px; } li { font:13px/1.6 ui-monospace, Menlo, monospace; }
+  code { font:13px ui-monospace, Menlo, monospace; }
+</style>
+</head>
+<body>
+<main>
+  <section>
+    <h1 id="titulo">DApp de votação</h1>
+    <small>Front-end (esta página) + carteira/conta + nó da rede + contrato <code>Votacao</code>. Sem servidor próprio guardando votos.</small>
+  </section>
+
+  <section>
+    <h2>1. Conexão</h2>
+    <div class="linha">
+      <div><label for="rpc">Nó da rede (RPC)</label><input id="rpc" value="http://127.0.0.1:8545"></div>
+      <div><label for="end">Endereço do contrato</label><input id="end" value="0x5FbDB2315678afecb367f032d93F642f64180aa3"></div>
+      <div style="flex:0 0 auto"><button id="conectar">Conectar</button></div>
+    </div>
+    <p class="suave" id="status">Desconectado. Suba o nó (<code>npx hardhat node</code>) e publique o contrato (<code>scripts/publicar.js</code>).</p>
+  </section>
+
+  <section>
+    <h2>2. Votar</h2>
+    <div class="linha">
+      <div><label for="conta">Conta (carteira)</label><select id="conta"></select></div>
+      <div><label for="opcao">Opção</label><select id="opcao"></select></div>
+      <div style="flex:0 0 auto"><button id="votar" disabled>Votar</button></div>
+    </div>
+    <p id="msg"></p>
+  </section>
+
+  <section>
+    <h2>3. Resultado (lido da blockchain)</h2>
+    <div id="resultado"><span class="suave">Conecte para ver.</span></div>
+  </section>
+
+  <section>
+    <h2>4. Eventos registrados</h2>
+    <ul id="eventos"></ul>
+  </section>
+</main>
+
+<script type="module">
+import { ethers } from "https://cdn.jsdelivr.net/npm/ethers@6.13.4/+esm";
+
+const ABI = [
+  "function titulo() view returns (string)",
+  "function aberta() view returns (bool)",
+  "function totalOpcoes() view returns (uint256)",
+  "function nomeDaOpcao(uint256) view returns (string)",
+  "function votos(uint256) view returns (uint256)",
+  "function votar(uint256)",
+  "event VotoRegistrado(address indexed eleitor, uint256 indexed opcao)",
+];
+const $ = (id) => document.getElementById(id);
+let provider, contrato, nomes = [];
+
+const erroLegivel = (e) => {
+  const texto = `${e.message ?? ""} ${e.data ?? ""} ${JSON.stringify(e.info ?? {})}`;
+  if (texto.includes("JaVotou")) return "Recusado pelo contrato: esta conta já votou.";
+  if (texto.includes("VotacaoFechada")) return "Recusado pelo contrato: a votação está encerrada.";
+  if (texto.includes("OpcaoInvalida")) return "Recusado pelo contrato: opção inexistente.";
+  return e.shortMessage ?? e.message;
+};
+
+async function atualizar() {
+  const totais = await Promise.all(nomes.map((_, i) => contrato.votos(i)));
+  const soma = totais.reduce((a, b) => a + Number(b), 0) || 1;
+  $("resultado").innerHTML = nomes.map((n, i) =>
+    `<div class="opcao"><span>${n}</span><div class="barra"><i style="width:${(Number(totais[i]) / soma) * 100}%"></i></div><b>${totais[i]}</b></div>`
+  ).join("");
+  const evs = await contrato.queryFilter(contrato.filters.VotoRegistrado());
+  $("eventos").innerHTML = evs.map((e) =>
+    `<li>bloco ${e.blockNumber}: ${e.args.eleitor.slice(0, 10)}... votou em "${nomes[Number(e.args.opcao)]}"</li>`).join("") || "<li>nenhum voto ainda</li>";
+}
+
+$("conectar").onclick = async () => {
+  try {
+    provider = new ethers.JsonRpcProvider($("rpc").value);
+    const bloco = await provider.getBlockNumber();
+    contrato = new ethers.Contract($("end").value, ABI, provider);
+    $("titulo").textContent = await contrato.titulo();
+    const n = Number(await contrato.totalOpcoes());
+    nomes = await Promise.all([...Array(n).keys()].map((i) => contrato.nomeDaOpcao(i)));
+    $("opcao").innerHTML = nomes.map((nome, i) => `<option value="${i}">${nome}</option>`).join("");
+    const contas = await provider.listAccounts();
+    $("conta").innerHTML = contas.slice(0, 10).map((c, i) =>
+      `<option value="${i}">Conta #${i} (${c.address.slice(0, 8)}...)</option>`).join("");
+    $("status").textContent = `Conectado. Bloco atual: ${bloco}. Votação ${(await contrato.aberta()) ? "aberta" : "encerrada"}.`;
+    $("votar").disabled = false;
+    await atualizar();
+  } catch (e) {
+    $("status").textContent = "Falha ao conectar: " + erroLegivel(e);
+  }
+};
+
+$("votar").onclick = async () => {
+  $("msg").className = ""; $("msg").textContent = "Enviando transação...";
+  try {
+    // Na rede local a conta já vem destravada; numa rede real quem assina é a carteira (MetaMask).
+    const signer = await provider.getSigner(Number($("conta").value));
+    const tx = await contrato.connect(signer).votar(Number($("opcao").value));
+    const r = await tx.wait();
+    $("msg").className = "ok";
+    $("msg").textContent = `Voto confirmado no bloco ${r.blockNumber} (gas ${r.gasUsed}).`;
+  } catch (e) {
+    $("msg").className = "erro";
+    $("msg").textContent = erroLegivel(e);
+  }
+  await atualizar();
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "nup2-demo-votacao",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Demonstração do seminário NUP2: contrato de votação em rede local com Hardhat 3",
+  "engines": { "node": ">=22.10.0" },
+  "scripts": {
+    "no": "hardhat node",
+    "teste": "hardhat test",
+    "demo": "hardhat run scripts/demo.js --network localhost",
+    "publicar": "hardhat run scripts/publicar.js --network localhost",
+    "benchmark": "hardhat run scripts/benchmark.js",
+    "dapp": "python3 -m http.server 3000 --directory dapp"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox-mocha-ethers": "^4.0.0",
+    "ethers": "^6.17.0",
+    "hardhat": "^3.22.0"
+  }
+}
