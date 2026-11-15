@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "description": "Demonstração do seminário NUP2: contrato de votação em rede local com Hardhat 3",
-  "engines": { "node": ">=22.10.0" },
+  "engines": { "node": ">=22.13.0" },
   "scripts": {
     "no": "hardhat node",
     "teste": "hardhat test",

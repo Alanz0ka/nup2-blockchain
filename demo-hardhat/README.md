@@ -3,7 +3,7 @@
 Testado em 15/11/2026 no Mac (Node 26, Hardhat 3.22, solc 0.8.28): 5 testes passando, `demo.js`, `benchmark.js` e o DApp funcionando.
 
 ## Antes de tudo
-1. Node.js 22.10 ou mais novo (`node -v`).
+1. Node.js 22.13 ou mais novo (`node -v`). O guia completo de uso está no README da raiz do repositório.
 2. **Copie esta pasta para fora do Google Drive** (por exemplo `~/nup2-demo`) antes de instalar. O `node_modules` tem milhares de arquivos e não deve ser sincronizado.
 3. Na pasta copiada: `npm install`. Na primeira vez que compilar, o Hardhat baixa o compilador Solidity (precisa de internet).
 
