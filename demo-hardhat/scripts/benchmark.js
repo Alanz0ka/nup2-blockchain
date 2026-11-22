@@ -10,8 +10,9 @@ import { join } from "node:path";
 
 const N = Number(process.env.N ?? 200);
 // Valores ilustrativos para estimar custo. Ajuste antes de apresentar (veja o preço do gas do dia).
-const GWEI = Number(process.env.GWEI ?? 5);
-const ETH_EM_REAIS = Number(process.env.ETH_REAIS ?? 15000);
+// Referência de 22/11/2026: gas médio ~0,2 gwei (Etherscan) e 1 ETH ~R$ 10.400; 1 gwei é um exemplo redondo.
+const GWEI = Number(process.env.GWEI ?? 1);
+const ETH_EM_REAIS = Number(process.env.ETH_REAIS ?? 10400);
 
 const { ethers } = await network.getOrCreate();
 const signers = await ethers.getSigners();

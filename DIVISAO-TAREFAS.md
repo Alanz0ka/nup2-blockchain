@@ -2,6 +2,8 @@
 
 Equipe: José Alan, Murilo e Klaus. Tema na planilha do professor Luiz Marcelo Freitas da Silva: **Dia 6, "Blockchain e Arquiteturas Descentralizadas"** (Web3, smart contracts, DApps, consenso, quando NÃO usar blockchain, trade-offs). Demonstração prevista na planilha: "contrato simples em rede local (Ganache/Hardhat)".
 
+**Apresentação: terça-feira, 24/11/2026** (confirmado pelo Alan em 22/11/2026).
+
 ## O que o professor pediu (Classroom, 07/10)
 - Apresentação de 20 a 30 minutos, mais até 15 minutos de perguntas.
 - Apresentação **individual de cada integrante**, mostrando que estudou o tema.
@@ -53,12 +55,12 @@ Total planejado: cerca de 30 minutos de fala, com folga para a demo falhar e ser
 - [ ] Um notebook só roda as três demos (ou cada um leva a sua). Testar o projetor/HDMI.
 - [ ] `npm install` feito antes, **sem depender da internet da sala** (exceção: o DApp usa CDN; o plano B é o `demo.js`).
 - [ ] Prints ou gravação de tela de cada demo como plano B.
-- [ ] Atualizar no slide 19 o preço do gas e do ETH do dia, ou deixar claro que são exemplos.
+- [x] Slide 19 atualizado em 22/11/2026 (benchmark refeito; 1 gwei e 1 ETH = R$ 10.400 como exemplo, com o gas real do dia na nota).
 - [ ] Ler `PERGUNTAS-PROVAVEIS.md`.
 - [ ] Revisar a ABNT das referências (slide 23) se o professor exigir.
 
 ## A confirmar com o professor ou com a turma
-1. **Data do Dia 6.** O Dia 5 é 17/11; a data do Dia 6 não aparece no recorte da planilha.
+1. ~~Data do Dia 6.~~ Confirmada: terça, 24/11/2026.
 2. **Os 20 a 30 minutos são da equipe ou de cada integrante?** O deck foi montado para 30 minutos da equipe. Se for por integrante, cada parte precisa ser ampliada e as demos podem ficar mais longas.
 3. Nome completo e sobrenomes de Murilo e Klaus, para a capa, se for pedida.
 4. Nome da disciplina (não aparece nas imagens).

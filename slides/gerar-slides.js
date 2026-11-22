@@ -626,7 +626,7 @@ Fonte do número: documentação do Bitcoin e do Ethereum; os valores variam com
 
   // ---- 19. Demo 3 ----
   s = novoSlide("ESCURO", P3, "Demo 3: banco x blockchain", 3);
-  s.addChart(pres.charts.BAR, [{ name: "Votos por segundo", labels: ["SQLite (em disco)", "Blockchain local"], values: [3261, 507] }], {
+  s.addChart(pres.charts.BAR, [{ name: "Votos por segundo", labels: ["SQLite (em disco)", "Blockchain local"], values: [3592, 543] }], {
     x: 0.5, y: 1.35, w: 5.0, h: 3.5, barDir: "col", chartColors: [HEX.teal, HEX.laranja],
     showTitle: true, title: "Gravações por segundo (200 votos)", titleColor: "FFFFFF", titleFontSize: 14, titleFontFace: "+mn-lt",
     showValue: true, dataLabelColor: "FFFFFF", dataLabelFontSize: 14, dataLabelFontFace: "+mn-lt", dataLabelPosition: "outEnd", dataLabelFormatCode: "#,##0",
@@ -641,20 +641,20 @@ Fonte do número: documentação do Bitcoin e do Ethereum; os valores variam com
     { text: "Custo por voto: ~55.461 gas", options: { breakLine: true } },
     { text: "", options: { breakLine: true } },
     { text: "Rede pública (exemplo):", options: { color: "C9D1DE", breakLine: true } },
-    { text: "5 gwei, 1 ETH = R$ 15.000", options: { color: "C9D1DE", breakLine: true } },
-    { text: "1 voto  = R$ 4,16", options: { color: "FFB4B4", bold: true, breakLine: true } },
-    { text: "200 votos = R$ 831,92", options: { color: "FFB4B4", bold: true, breakLine: true } },
+    { text: "1 gwei, 1 ETH = R$ 10.400", options: { color: "C9D1DE", breakLine: true } },
+    { text: "1 voto  = R$ 0,58", options: { color: "FFB4B4", bold: true, breakLine: true } },
+    { text: "200 votos = R$ 115,36", options: { color: "FFB4B4", bold: true, breakLine: true } },
     { text: "", options: { breakLine: true } },
     { text: "Banco de dados: R$ 0,00 por voto", options: { color: "7EE2A8" } },
   ], { x: 5.95, y: 1.45, w: 3.4, h: 3.3, fontSize: 12, fontFace: MONO, color: C.background1, valign: "top", margin: 0, isTextBox: true, objectName: "Saída do benchmark" });
-  fonte(s, "Medido no Mac do Alan, em 15/11/2026; refaça na sua máquina. Rede local = melhor caso. Preço do gas e do ETH são exemplos.", true);
+  fonte(s, "Medido no Mac do Alan, em 22/11/2026; refaça na sua máquina. Rede local = melhor caso. Gas e cotação do ETH são exemplos (22/11/2026: gas médio ~0,2 gwei, 1 ETH ~R$ 10.400).", true);
   nota(s, `
 QUEM FALA: Klaus. TEMPO: 2 minutos de demonstração ao vivo.
-Rodar na pasta demo-hardhat: npx hardhat run scripts/benchmark.js (não precisa do nó aberto, usa a rede simulada embutida). Variáveis opcionais: N=500, GWEI=10, ETH_REAIS=<cotação do dia>.
+Rodar na pasta demo-hardhat: npx hardhat run scripts/benchmark.js (não precisa do nó aberto, usa a rede simulada embutida). Variáveis opcionais: N=500, GWEI=10, ETH_REAIS=<cotação do dia>. Sem variáveis, o script usa 1 gwei e R$ 10.400.
 O script grava N votos em dois lugares: um banco SQLite em arquivo (um INSERT por vez, para ser justo) e o contrato Votacao numa blockchain local (uma transação por voto).
-Resultado da nossa execução (15/11/2026, 200 votos): SQLite cerca de 3.261 votos/s; blockchain local cerca de 507 votos/s. Os números mudam a cada execução e em cada máquina, então REFAZER antes da apresentação e atualizar o slide se der muito diferente.
+Resultado da nossa execução (22/11/2026, 200 votos): SQLite cerca de 3.592 votos/s; blockchain local cerca de 543 votos/s (em 15/11 deu 3.261 e 507). Os números mudam a cada execução e em cada máquina, então REFAZER antes da apresentação e atualizar o slide se der muito diferente.
 ATENÇÃO para não exagerar: a rede local é o melhor caso possível (um nó só, mineração instantânea, sem rede, sem consenso). Numa rede pública cada voto espera um bloco (12 s no Ethereum) e custa gas.
-Custo: o script pega o gas médio por voto (~55 mil) e multiplica por um preço de gas e uma cotação do ETH que são EXEMPLOS. Hoje o gas na camada 1 do Ethereum costuma ser bem baixo; ajustar os valores com o preço do dia antes de apresentar e dizer que é estimativa.
+Custo: o script pega o gas médio por voto (~55 mil) e multiplica por um preço de gas e uma cotação do ETH que são EXEMPLOS. Em 22/11/2026 o gas médio na camada 1 do Ethereum estava em cerca de 0,2 gwei (Etherscan) e 1 ETH valia cerca de R$ 10.400. A 0,2 gwei o voto sairia por uns R$ 0,12; o slide usa 1 gwei (R$ 0,58) por ser um número redondo e ainda baixo. Em dias de rede cheia já passou de 50 gwei, e aí o mesmo voto custaria mais de R$ 28. Dizer que é estimativa.
 Mensagem: o banco de dados faz o mesmo trabalho mais rápido e de graça. Blockchain só se paga quando o ganho de não precisar de um intermediário confiável compensa isso.`);
 
   // ---- 20. Casos reais ----

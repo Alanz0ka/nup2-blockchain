@@ -15,5 +15,6 @@ Web3, smart contracts, DApps, consenso, quando NÃO usar blockchain, trade-offs.
 - Nada de `node_modules` dentro do Drive: instalar numa cópia fora dele.
 - Para regenerar os slides: numa pasta de trabalho, `npm install pptxgenjs react-icons react react-dom sharp`; depois
   `NODE_PATH=<pasta>/node_modules node gerar-slides.js saida.pptx`. Revisar em imagem (LibreOffice + pdftoppm) depois de mexer no layout.
-- Números do slide 19 (benchmark) são de uma execução em 15/11/2026 e variam; refazer antes da apresentação.
-- Nenhuma entrega foi enviada ao Classroom. A apresentação é oral, no Dia 6 (data a confirmar).
+- Números do slide 19 (benchmark) são de uma execução em 22/11/2026 e variam; se refizer, atualizar o slide e a nota.
+- Nenhuma entrega foi enviada ao Classroom. A apresentação é oral, no Dia 6: terça, 24/11/2026.
+- Cópias de trabalho fora do Drive no Mac: `~/nup2-demo` (demo-hardhat com `node_modules`) e `~/nup2-slides-build` (dependências do gerador de slides).

@@ -1,6 +1,6 @@
 # Demo Hardhat: contrato de votação em rede local
 
-Testado em 15/11/2026 no Mac (Node 26, Hardhat 3.22, solc 0.8.28): 5 testes passando, `demo.js`, `benchmark.js` e o DApp funcionando.
+Testado em 15/11/2026 e de novo em 22/11/2026 no Mac (Node 26, Hardhat 3.22, solc 0.8.28): 5 testes passando, `demo.js`, `benchmark.js` e o DApp funcionando.
 
 ## Antes de tudo
 1. Node.js 22.13 ou mais novo (`node -v`). O guia completo de uso está no README da raiz do repositório.
