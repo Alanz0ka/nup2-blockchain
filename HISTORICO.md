@@ -9,3 +9,17 @@
 - Pesquisado na web: Ganache descontinuado pela Consensys (set/2023), Drex tirou a DLT da fase seguinte (ago/2025), requisitos do Hardhat 3 (Node 22.10 ou mais novo).
 - Erro encontrado e corrigido: a diferença de gas entre votos vem do contador da opção (zero para um), não do endereço do eleitor.
 - Benchmark (200 votos, Mac do Alan): SQLite em disco 3.261 votos/s; blockchain local 507 votos/s; ~55.461 gas por voto em média.
+
+## 22/11/2026
+- Alan confirmou que a apresentação é terça, 24/11/2026.
+- Demo copiada para `~/nup2-demo` (fora do Drive), `npm install` refeito: 5 testes passando, `demo.js` contra o nó local e a mini-blockchain funcionando (Node 26.13).
+- Benchmark refeito duas vezes (200 votos): SQLite 3.592 e 3.270 votos/s; blockchain local 543 e 539 votos/s; 55.461 gas por voto. Slide 19 atualizado com a primeira execução.
+- Exemplo de custo do slide 19 trocado de 5 gwei / R$ 15.000 para 1 gwei / R$ 10.400 (1 voto = R$ 0,58; 200 votos = R$ 115,36). Pesquisado na web em 22/11: gas médio na camada 1 em torno de 0,2 gwei (Etherscan) e 1 ETH entre R$ 10.260 e R$ 10.450 (Coinbase, Trust Wallet, Xe, dados de 18 e 19/11). Os padrões do `benchmark.js` acompanharam.
+- Deck e PDF regenerados (23 slides), slide 19 conferido em imagem.
+- `PROXIMOS-PASSOS.md` reescrito com o roteiro de terça e o que depende da equipe.
+
+## 24/11/2026 (dia da apresentação)
+- Criado `ROTEIRO-ALAN.md`: roteiro de fala da Parte 2 do Alan (slides 9 a 15), com tempos, falas, demo passo a passo, conceitos e perguntas.
+- Demo e DApp rodados no PC Windows (Node 24.21; clone em `%USERPROFILE%\repos\nup2-blockchain`): `demo.js` com deploy de 810.488 gas e votos de 72.297, 55.197 e 72.309; DApp votando e recusando voto repetido. No PowerShell 5.1 a política de execução bloqueia o `npm.ps1`: usar `npm.cmd` e `npx.cmd`.
+- O Alan editou o pptx no LibreOffice, a partir da versão antiga da `main`: tirou as etiquetas "Parte N · Nome" dos slides 3 a 21 e encurtou o rodapé do slide 19. A edição foi refeita no `slides/gerar-slides.js` sobre a versão de 22/11 (etiquetas desligadas; rodapé "Medido no Mac do Alan, em 22/11/2026. Rede local = melhor caso. Gas e cotação do ETH são exemplos."). Pptx e PDF regenerados (PDF pelo LibreOffice, 23 páginas) e enviados ao PR #2. Não conferido em imagem (sem poppler no Windows).
+- Backup do arquivo editado à mão: `%USERPROFILE%\repos\backup-pptx-editado-no-LibreOffice-24-11.pptx` (fora do repositório).

@@ -9,11 +9,16 @@ Web3, smart contracts, DApps, consenso, quando NÃO usar blockchain, trade-offs.
 - `NUP2 - Blockchain e Arquiteturas Descentralizadas.pptx`: 23 slides com notas de fala em cada um. Gerado por `slides/gerar-slides.js`.
 - `demo-hardhat/`: contrato `Votacao.sol`, testes, scripts de demo e benchmark, DApp de uma página. Ver o README dele.
 - `demo-mini-blockchain/mini-chain.js`: mini-blockchain sem dependências.
+- `ROTEIRO-ALAN.md`: roteiro de fala da Parte 2 do Alan (slides 9 a 15), com demo passo a passo.
+- `ONDE-ESTUDAR.md`: links conferidos em 22/11/2026 para estudar cada parte.
 
 ## Regras
 - Texto sem travessões nem tiques de IA (`memorias/geral/feedback-texto-sem-cara-de-ia.md`). Conferir com busca por "—" e "–".
 - Nada de `node_modules` dentro do Drive: instalar numa cópia fora dele.
 - Para regenerar os slides: numa pasta de trabalho, `npm install pptxgenjs react-icons react react-dom sharp`; depois
   `NODE_PATH=<pasta>/node_modules node gerar-slides.js saida.pptx`. Revisar em imagem (LibreOffice + pdftoppm) depois de mexer no layout.
-- Números do slide 19 (benchmark) são de uma execução em 15/11/2026 e variam; refazer antes da apresentação.
-- Nenhuma entrega foi enviada ao Classroom. A apresentação é oral, no Dia 6 (data a confirmar).
+- Números do slide 19 (benchmark) são de uma execução em 22/11/2026 e variam; se refizer, atualizar o slide e a nota.
+- Mexer nos slides pelo `gerar-slides.js` e regenerar. Não salvar o pptx no LibreOffice: ele reescreve o arquivo e já perdeu formas (24/11/2026). A etiqueta "Parte N · Nome" está desligada em `novoSlide` desde 24/11/2026.
+- Windows (PowerShell 5.1): usar `npm.cmd` e `npx.cmd`; clone do repositório em `%USERPROFILE%\repos\nup2-blockchain`, dependências do gerador em `%USERPROFILE%\nup2-slides-build`.
+- Nenhuma entrega foi enviada ao Classroom. A apresentação é oral, no Dia 6: terça, 24/11/2026.
+- Cópias de trabalho fora do Drive no Mac: `~/nup2-demo` (demo-hardhat com `node_modules`) e `~/nup2-slides-build` (dependências do gerador de slides).
