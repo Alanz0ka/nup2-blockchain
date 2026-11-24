@@ -1,7 +1,7 @@
 # NUP2: Blockchain e Arquiteturas Descentralizadas
 
 Material do seminário NUP2: Web3, contratos inteligentes, DApps, consenso, quando não usar blockchain e trade-offs.
-Este README explica como rodar todos os códigos do repositório. Cada integrante apresenta uma parte com uma demonstração ao vivo.
+Este README explica como rodar todos os códigos do repositório. Para um passo a passo curto, na ordem da apresentação, veja o [EXECUTAR.md](EXECUTAR.md). Cada integrante apresenta uma parte com uma demonstração ao vivo.
 
 ## O que tem aqui
 
@@ -156,8 +156,8 @@ Parâmetros opcionais (variáveis de ambiente):
 | Variável | O que muda | Padrão |
 |---|---|---|
 | `N` | quantidade de votos | 200 |
-| `GWEI` | preço do gas em gwei | 5 |
-| `ETH_REAIS` | cotação de 1 ETH em reais | 15000 |
+| `GWEI` | preço do gas em gwei | 1 |
+| `ETH_REAIS` | cotação de 1 ETH em reais | 10400 |
 
 ```bash
 N=500 GWEI=10 ETH_REAIS=18000 npx hardhat run scripts/benchmark.js
