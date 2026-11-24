@@ -106,7 +106,9 @@ function fonte(slide, texto, escuro = false) {
 function novoSlide(layout, secao, titulo, parte) {
   const s = pres.addSlide({ masterName: layout, sectionTitle: secao });
   if (titulo) s.addText(titulo, { placeholder: "title" });
-  if (parte) pilula(s, parte);
+  // Etiqueta "Parte N · Nome" desligada em 24/11/2026 (a divisão entre os integrantes não é mais mostrada nos slides).
+  // Para voltar a mostrá-la, descomente a linha abaixo.
+  // if (parte) pilula(s, parte);
   return s;
 }
 // bloco da cadeia (motivo visual repetido)
@@ -647,7 +649,7 @@ Fonte do número: documentação do Bitcoin e do Ethereum; os valores variam com
     { text: "", options: { breakLine: true } },
     { text: "Banco de dados: R$ 0,00 por voto", options: { color: "7EE2A8" } },
   ], { x: 5.95, y: 1.45, w: 3.4, h: 3.3, fontSize: 12, fontFace: MONO, color: C.background1, valign: "top", margin: 0, isTextBox: true, objectName: "Saída do benchmark" });
-  fonte(s, "Medido no Mac do Alan, em 22/11/2026; refaça na sua máquina. Rede local = melhor caso. Gas e cotação do ETH são exemplos (22/11/2026: gas médio ~0,2 gwei, 1 ETH ~R$ 10.400).", true);
+  fonte(s, "Medido no Mac do Alan, em 22/11/2026. Rede local = melhor caso. Gas e cotação do ETH são exemplos.", true);
   nota(s, `
 QUEM FALA: Klaus. TEMPO: 2 minutos de demonstração ao vivo.
 Rodar na pasta demo-hardhat: npx hardhat run scripts/benchmark.js (não precisa do nó aberto, usa a rede simulada embutida). Variáveis opcionais: N=500, GWEI=10, ETH_REAIS=<cotação do dia>. Sem variáveis, o script usa 1 gwei e R$ 10.400.
